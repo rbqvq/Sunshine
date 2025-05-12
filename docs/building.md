@@ -72,13 +72,13 @@ sudo port install "${dependencies[@]}"
 ```
 
 #### Windows
-First you need to install [MSYS2](https://www.msys2.org), then startup "MSYS2 UCRT64" and execute the following
+First you need to install [MSYS2 2024-12-08](https://github.com/msys2/msys2-installer/releases/tag/2024-12-08), then startup "MSYS2 UCRT64" and execute the following
 commands.
 
-##### Update all packages
+<!-- ##### Update all packages
 ```bash
 pacman -Syu
-```
+``` -->
 
 ##### Install dependencies
 ```bash

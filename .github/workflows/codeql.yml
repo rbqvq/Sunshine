@@ -178,10 +178,10 @@ jobs:
         if: >-
           runner.os == 'Windows' &&
           matrix.language == 'cpp'
-        uses: msys2/setup-msys2@v2
+        uses: msys2/setup-msys2@v2.26.0
         with:
           msystem: ucrt64
-          update: true
+          # update: true
 
       # Initializes the CodeQL tools for scanning.
       - name: Initialize CodeQL
