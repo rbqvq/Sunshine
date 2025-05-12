@@ -4,28 +4,6 @@ set -e
 # update pacman
 pacman --noconfirm -Syu
 
-gcc_version="14.2.0-3"
-
-broken_deps=(
-  "mingw-w64-ucrt-x86_64-gcc"
-  "mingw-w64-ucrt-x86_64-gcc-libs"
-)
-
-tarballs=""
-for dep in "${broken_deps[@]}"; do
-  tarball="${dep}-${gcc_version}-any.pkg.tar.zst"
-
-  # download and install working version
-  wget https://repo.msys2.org/mingw/ucrt64/${tarball}
-
-  tarballs="${tarballs} ${tarball}"
-done
-
-# install broken dependencies
-if [ -n "$tarballs" ]; then
-  pacman -U --noconfirm ${tarballs}
-fi
-
 # install dependencies
 dependencies=(
   "git"
@@ -42,8 +20,7 @@ dependencies=(
   "mingw-w64-ucrt-x86_64-opus"
   "mingw-w64-ucrt-x86_64-toolchain"
 )
-
-pacman -Syu --noconfirm --ignore="$(IFS=,; echo "${broken_deps[*]}")" "${dependencies[@]}"
+pacman -S --noconfirm "${dependencies[@]}"
 
 # build
 mkdir -p build
