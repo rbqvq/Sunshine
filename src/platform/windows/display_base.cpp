@@ -12,7 +12,10 @@
 // lib includes
 #include <boost/algorithm/string/join.hpp>
 #include <boost/process/v1.hpp>
+
+#ifndef __AARCH64__
 #include <MinHook.h>
+#endif
 
 // We have to include boost/process/v1.hpp before display.h due to WinSock.h,
 // but that prevents the definition of NTSTATUS so we must define it ourself.
@@ -444,12 +447,14 @@ namespace platf::dxgi {
         FreeLibrary(user32);
       }
 
+      #ifndef __AARCH64__
       {
         // We aren't calling MH_Uninitialize(), but that's okay because this hook lasts for the life of the process
         MH_Initialize();
         MH_CreateHookApi(L"win32u.dll", "NtGdiDdDDIGetCachedHybridQueryValue", (void *) NtGdiDdDDIGetCachedHybridQueryValueHook, nullptr);
         MH_EnableHook(MH_ALL_HOOKS);
       }
+      #endif
     });
 
     // Get rectangle of full desktop for absolute mouse coordinates

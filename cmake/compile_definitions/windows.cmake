@@ -85,6 +85,12 @@ list(PREPEND PLATFORM_LIBRARIES
         wsock32
 )
 
+if(CMAKE_SYSTEM_PROCESSOR MATCHES "ARM64")
+    list(REMOVE_ITEM PLATFORM_LIBRARIES
+            minhook::minhook
+    )
+endif()
+
 if(SUNSHINE_ENABLE_TRAY)
     list(APPEND PLATFORM_TARGET_FILES
             "${CMAKE_SOURCE_DIR}/third-party/tray/src/tray_windows.c")
